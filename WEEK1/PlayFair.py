@@ -11,7 +11,7 @@ if __name__ == "__main__":
     key = "MONARCHY"
     cipher = PlayfairCipher(key)
     
-    plaintext = "INSTRUMENTS"
+    plaintext = "Do you like to study cryptography course?"
     
     ciphertext = cipher.process(plaintext, mode='encrypt')
     decrypted = cipher.process(ciphertext, mode='decrypt')
@@ -19,4 +19,3 @@ if __name__ == "__main__":
     print(f"Khóa (Key): {key}")
     print(f"Văn bản gốc: {plaintext}")
     print(f"Bản mã (Ciphertext): {ciphertext}") 
-    print(f"Bản giải mã: {decrypted} (Lưu ý: chữ X ở cuối là padding)")

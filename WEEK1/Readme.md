@@ -5,7 +5,7 @@
 khoá. Ví dụ (solved by Lord Peter Wimsey in Dorothy Sayers’s Have His
 Carcase ). Từ khoá là MONARCHY
 
-![w1](Img\w1.png)
+![w1](Img/w1.png)
 
 - Ma trận được thiết lập bằng cách điền các ký tự của từ khoá (trừ những
 chữ cái trùng lặp) từ trái sang phải từ trên xuống dưới, sau đó điền vào
