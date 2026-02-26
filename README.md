@@ -1,0 +1,2 @@
+# Giới thiệu về Repo
+***Đây là repo chứa các bài tập về nhà và tài liệu của môn học nhập môn An toàn thông tin. Có 8 tuần học về hệ mật và mong muốn sau 8 tuần học này có thể xây dựng được một thư viện mã hóa và giải mã thông tin cho riêng mình dựa vào các hệ mật đã học bằng ngôn ngữ lập trình python.***
