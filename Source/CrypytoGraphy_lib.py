@@ -1,4 +1,5 @@
 import re
+import math
 
 class PlayfairCipher:
     def __init__(self, key: str):
@@ -71,3 +72,46 @@ class PlayfairCipher:
                 result += self.matrix[r1][c2] + self.matrix[r2][c1]
 
         return result
+
+class AffineCipher:
+    def __init__(self, a: int, b: int):
+        # M là tổng số ký tự trong chuẩn Unicode
+        self.M = 1114112 
+        
+        # Kiểm tra tính hợp lệ của khóa a
+        if math.gcd(a, self.M) != 1:
+            # Nếu không nguyên tố cùng nhau, tìm một số a gần nhất hợp lệ để gợi ý
+            suggested_a = a
+            while math.gcd(suggested_a, self.M) != 1:
+                suggested_a += 1
+            raise ValueError(f"Khóa a={a} không hợp lệ vì không nguyên tố cùng nhau với {self.M}.\n"
+                             f"Gợi ý chọn a = {suggested_a}")
+        
+        self.a = a
+        self.b = b
+        # Tính nghịch đảo modulo của a
+        self.a_inv = pow(self.a, -1, self.M)
+
+    def encrypt(self, text: str) -> str:
+        """Mã hóa chuỗi ký tự Unicode"""
+        ciphertext = ""
+        for char in text:
+            # Lấy mã điểm Unicode của ký tự (bao gồm cả dấu và khoảng trắng)
+            # hàm ord() trả về mã điểm Unicode của ký tự và đầu vào chỉ là một ký tự duy nhất
+            x = ord(char) 
+            # Công thức: E(x) = (ax + b) mod M
+            e_x = (self.a * x + self.b) % self.M
+            
+            # Hàm chr() trả về ký tự Unicode tương ứng với mã điểm đã cho 
+            ciphertext += chr(e_x)
+        return ciphertext
+
+    def decrypt(self, ciphertext: str) -> str:
+        """Giải mã chuỗi ký tự Unicode"""
+        plaintext = ""
+        for char in ciphertext:
+            y = ord(char)
+            # Công thức: D(y) = a^-1 * (y - b) mod M
+            d_y = (self.a_inv * (y - self.b)) % self.M
+            plaintext += chr(d_y)
+        return plaintext
