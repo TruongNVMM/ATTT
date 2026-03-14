@@ -115,3 +115,82 @@ class AffineCipher:
             d_y = (self.a_inv * (y - self.b)) % self.M
             plaintext += chr(d_y)
         return plaintext
+
+class EuclideanGF2:
+    """
+    Lớp chứa các phương thức liên quan đến phép chia và nhân đa thức trong GF(2)
+    """
+    
+    def poly_divmod(self, a, b):
+        """
+        Phép chia đa thức lấy nguyên và dư trong GF(2)
+        Tham số: 
+            - a: số chia
+            - b: số bị chia
+        Đầu ra: 
+            - q: thương
+            - r: dư
+        Phương thức:
+            - Sử dụng bit_length() để xác định bậc của đa thức
+        """
+
+        if b == 0:
+            raise ZeroDivisionError
+        q = 0
+        r = a
+
+        # Tiếp tục thực hiện phép chia cho đến khi bậc của r nhỏ hơn bậc của b
+        while r >= b and r.bit_length() >= b.bit_length():
+            shift = r.bit_length() - b.bit_length()   # Tính số bit cần dịch để b có cùng bậc với r
+            q ^= (1 << shift)                         # Phép cộng (XOR) vào thương
+            r ^= (b << shift)                         # Phép trừ (XOR) đa thức
+        return q, r
+    
+    def poly_mul(self, a, b):
+        """
+        Phép nhân đa thức trong GF(2)
+        Tham số: 
+            - a: đa thức thứ nhất
+            - b: đa thức thứ hai
+        Đầu ra:
+            - res: kết quả của phép nhân
+        Phương thức:
+            - Sử dụng phép dịch bit và XOR để thực hiện phép nhân
+        """
+
+        res = 0
+        while b > 0:
+            if b & 1:
+                res ^= a
+
+            a <<= 1
+            b >>= 1
+        return res
+    
+    def extended_gcd_gf2(self, a, b):
+        """
+        Thuật toán Euclid mở rộng trong GF(2)
+        Tham số: 
+            - a: đa thức thứ nhất
+            - b: đa thức thứ hai
+        Đầu ra:
+            - gcd: Ước số chung lớn nhất của a và b
+            - s: Hệ số s trong phương trình Bézout (s*a + t*b = gcd)
+            - t: Hệ số t trong phương trình Bézout (s*a + t*b = gcd)
+        Phương thức:
+            - Sử dụng phép chia và nhân đa thức trong GF(2)
+        """
+
+        old_r, r = a, b
+        old_s, s = 1, 0
+        old_t, t = 0, 1
+        
+        while r != 0:
+            quotient, remainder = self.poly_divmod(old_r, r)
+            
+            old_r, r = r, remainder
+            old_s, s = s, old_s ^ self.poly_mul(quotient, s)
+            old_t, t = t, old_t ^ self.poly_mul(quotient, t)
+            
+        return old_r, old_s, old_t
+
