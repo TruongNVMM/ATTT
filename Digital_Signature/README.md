@@ -249,4 +249,3 @@ No `pip install` needed.
 | Hoàng Đức Trung | 20234041 | RSA algorithm |
 | Vũ Ngọc Tuấn | 20234044 | Receiver block|
 | Lê Nhật Trung | 202414953 | Sender block |
-#### Instructor: Dr. Tạ Thị Kim Huệ
