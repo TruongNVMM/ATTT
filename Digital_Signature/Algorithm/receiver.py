@@ -82,4 +82,3 @@ class Receiver:
             
         return is_verified, plain_message
 
-
