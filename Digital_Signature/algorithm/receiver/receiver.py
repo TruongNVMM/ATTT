@@ -16,8 +16,8 @@ class Receiver:
         - PriKey(R): Dùng cho khối Decryption 1 (Giải mã gói S&E Message bằng RSA)
         (Khóa PubKey(S) của Sender sẽ được trích xuất động trong bước Unpack)
         """
-        self.dsa = DSA()"""để verify chữ ký """
-        self.rsa = RSA()"""để giải mã """
+        self.dsa = DSA() 
+        self.rsa = RSA() 
         
         # Đọc khóa Private Key (RSA) của Receiver
         if os.path.exists(private_key_r_path):
