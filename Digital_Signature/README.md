@@ -126,7 +126,7 @@ Supported algorithms: `DSA`, `RSA`, `ECDSA`
 ```bash
 git clone https://github.com/TruongNVMM/ATTT
 cd Digital_Signature
-python -m Digital_Signature.pipeline
+python pipeline.py
 ```
 
 You will be prompted to:
