@@ -240,7 +240,8 @@ No `pip install` needed.
 ---
 
 ## Contributors
-#### Instructor: Dr. Tạ Thị Kim Huệ
+### Theoretical Foundations of Cryptography
+#### Instructor: Dr. Tạ Thị Kim Huệ 
 | Name        | ID          | Task        |
 | :-----------| :-----------| :-----------|
 | Nguyễn Việt Trường | 20234042 | Key and Test vector |
@@ -249,3 +250,14 @@ No `pip install` needed.
 | Hoàng Đức Trung | 20234041 | RSA algorithm |
 | Vũ Ngọc Tuấn | 20234044 | Receiver block|
 | Lê Nhật Trung | 202414953 | Sender block |
+
+## Citation
+```bibtex
+@article{
+  author    = {Ravneet Kaur , Amandeep Kaur - Assistant Professor in Department of Computer Science},
+  title     = {DIGITAL SIGNATURE},
+  year      = {2012},
+  url       = {https://doi.org/10.1109/ICCS.2012.25}
+}
+```
+---
