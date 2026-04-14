@@ -20,7 +20,7 @@ def test_case_2(sender, receiver, message_input):
     # Bước 2: Kẻ tấn công can thiệp vào dữ liệu
     # MÔ PHỎNG: Giả sử attacker đã chặn được gói tin, bằng một cách kì diệu 
     # giải mã được lớp RSA (attacker mượn `receiver.pri_key_r` để giả lập quá trình này)
-    # và thay đổi nội dung bên trong bằng cách thêm "YUI HATANO" vào 
+    # và thay đổi nội dung bên trong bằng cách thêm "WORLD" vào 
     try:
         # Bóc lớp vỏ Base64 nguyên vẹn
         encrypted_se_repr = base64.b64decode(network_message).decode('utf-8')
@@ -30,7 +30,7 @@ def test_case_2(sender, receiver, message_input):
         decrypted_json = receiver.rsa.decrypt(encrypted_array, receiver.pri_key_r)
         data = json.loads(decrypted_json)
         
-        data["message"] = data["message"] + " YUI HATANO"
+        data["message"] = data["message"] + " WORLD"
         
         # Bước 3: Người nhận tiến hành xác thực DSA với gói tin đã bị sửa
         msg_bytes = data["message"].encode('utf-8')
