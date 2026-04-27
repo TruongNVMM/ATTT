@@ -136,15 +136,22 @@ class RSA:
         d, n = priv_key
         return ''.join(chr(pow(c, d, n)) for c in ciphertext)
 
-    def sign(self, message):
+    def sign(self, message, private_key=None):
         """
-        Ký số một thông điệp (Hash đơn giản). (Tùy chọn tương tự DSA/ECDSA).
+        Ký số một thông điệp bằng private key.
         Ở đây ta ký trực tiếp từng ký tự (Mục đích minh họa học tập).
+
+        Args:
+            message (str): Thông điệp cần ký.
+            private_key (tuple, optional): (d, n) — nếu None sẽ dùng self._private_key.
+        Returns:
+            List[int]: Chữ ký số dưới dạng danh sách số nguyên.
         """
-        if self._private_key is None:
+        priv_key = private_key if private_key is not None else self._private_key
+        if priv_key is None:
             raise RuntimeError("No private key loaded to sign.")
         
-        d, n = self._private_key
+        d, n = priv_key
         # Trong thực tế phải Hash message rồi ký lên mã Hash đó
         return [pow(ord(c), d, n) for c in message]
 

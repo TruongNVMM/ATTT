@@ -5,7 +5,11 @@ import argparse
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
-from src.asymmetric.ECDSA.privateKey import PrivateKey
+try:
+    from src.asymmetric.ECDSA.privateKey import PrivateKey as ECDSAPrivateKey
+except ImportError:
+    ECDSAPrivateKey = None
+
 from src.asymmetric.DSA import DSA
 from src.asymmetric.RSA.RSA import RSA
 
@@ -24,7 +28,9 @@ def custom_to_pem(algo_name, key_data, is_private=True):
 ''' KEY GENERATION '''
 def generate_keys(algorithm):
     if algorithm == "ECDSA":
-        private_key = PrivateKey()
+        if ECDSAPrivateKey is None:
+            raise ImportError("ECDSA module is not available in this project.")
+        private_key = ECDSAPrivateKey()
         public_key = private_key.publicKey()
 
         private_pem = private_key.toPem()
